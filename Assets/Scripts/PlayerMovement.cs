@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         if (movement.x * face < 0) face *= -1;
         spriteRenderer.flipX = (face < 0);
 
-        if (Input.GetKeyDown("space") && wasGrounded)
+        if (Input.GetButton("Jump") && wasGrounded)
         {
             jumps = 10;
         }
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool isGrounded()
     {
-        var colliders = Physics2D.OverlapCircleAll(groundCheckPosition.transform.position, groundCheckRadius);
+        var colliders = Physics2D.OverlapCircleAll(groundCheckPosition.transform.position, groundCheckRadius,LayerMask.GetMask("Default"));
         foreach (var collider in colliders)
         {
             if (collider.gameObject != gameObject)
