@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private Vector2 movement;
     private int jumps = 0;
-    private bool wasGrounded = true;
+    public bool wasGrounded = true;
     
     private float face = 1;
     // Start is called before the first frame update
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isJumping", true);
     }
     
-    private bool isGrounded()
+    public bool isGrounded()
     {
         var colliders = Physics2D.OverlapCircleAll(groundCheckPosition.transform.position, groundCheckRadius,LayerMask.GetMask("Default"));
         foreach (var collider in colliders)
@@ -90,5 +90,13 @@ public class PlayerMovement : MonoBehaviour
                 playerRb.AddForce(Vector2.up * jumpForce);
             }
             
+    }
+
+
+    private void OnDrawGizmos()
+    {
+
+        Gizmos.DrawWireSphere(groundCheckPosition.transform.position, groundCheckRadius);
+
     }
 }
