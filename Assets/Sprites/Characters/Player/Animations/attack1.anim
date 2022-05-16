@@ -23,8 +23,10 @@ AnimationClip:
       value: {fileID: -1537543066, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
     - time: 0.1
       value: {fileID: -1670049655, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
-    - time: 0.21666667
+    - time: 0.16666667
       value: {fileID: 2116475316, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
+    - time: 0.26666668
+      value: {fileID: -285517542, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
     - time: 0.5
       value: {fileID: -285517542, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
     attribute: m_Sprite
@@ -49,6 +51,7 @@ AnimationClip:
     - {fileID: -1537543066, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
     - {fileID: -1670049655, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
     - {fileID: 2116475316, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
+    - {fileID: -285517542, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
     - {fileID: -285517542, guid: 1cd5cff4149bbe04db44a93e02b60895, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -75,22 +78,22 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.21666667
-    functionName: onAttackComboWindow
+  - time: 0.2
+    functionName: OnAttackComboWindow
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.41666666
-    functionName: onAttackWindowComboClose
+  - time: 0.43333334
+    functionName: OnAttackWindowComboClose
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5
-    functionName: onAttackEnd
+    functionName: OnAttackEnd
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
