@@ -35,6 +35,7 @@ public class EnemyController : BaseController
 
         if (adx < attackRange)
         {
+                movementScript.Move(0);
                if(!attackScript.IsAttacking) attackScript.Attack();
         }
         else if ( adx < detectRange && adx > detectThreshold)
