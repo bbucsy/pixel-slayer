@@ -11620,7 +11620,7 @@ MonoBehaviour:
     m_Bits: 1
   hitPoint: {fileID: 1868278349}
   hitRadius: 0.3
-  damage: 10
+  damage: 50
   enableGizmo: 0
 --- !u!1001 &3013027402813437487
 PrefabInstance:
@@ -11689,5 +11689,13 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1725158034}
+    - target: {fileID: 8116886794226886224, guid: f69abe87898675d4ea1b2ddd0ea5ba37, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116886794226886224, guid: f69abe87898675d4ea1b2ddd0ea5ba37, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69abe87898675d4ea1b2ddd0ea5ba37, type: 3}

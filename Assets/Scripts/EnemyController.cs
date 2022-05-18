@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CharacterBehaviour;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : BaseController
 {
     public float attackRange = 0.5f;
     public float detectRange = 5;
@@ -57,4 +58,5 @@ public class EnemyController : MonoBehaviour
 
         
     }
+
 }

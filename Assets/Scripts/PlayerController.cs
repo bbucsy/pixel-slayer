@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CharacterBehaviour;
 using UnityEngine;
 
 
-[RequireComponent(typeof(CharacterMovement))]
-[RequireComponent(typeof(CharacterAttack))]
-public class PlayerController : MonoBehaviour
+
+public class PlayerController : BaseController
 {
     public CharacterMovement movementScript;
     public CharacterAttack attackScript;
@@ -54,4 +54,5 @@ public class PlayerController : MonoBehaviour
         jump = false;
         attack = false;
     }
+    
 }
