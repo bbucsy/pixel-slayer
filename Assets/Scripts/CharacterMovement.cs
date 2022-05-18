@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -23,7 +24,7 @@ public class CharacterMovement : MonoBehaviour
 
 
     private bool wasGrounded = true;
-    private float face = 1;
+    private bool rightFacing = true;
     
     private void Reset()
     {
@@ -57,9 +58,13 @@ public class CharacterMovement : MonoBehaviour
         
         animator.SetFloat("Speed", Math.Abs(targetVelocity.x));
 
-        if ((targetVelocity.x > 0 && face < 0) || (targetVelocity.x < 0 && face > 0)) face *= -1;
-        
-        spriteRenderer.flipX = face < 0;
+
+        if ((rightFacing && direction < 0) || (!rightFacing && direction > 0))
+        {
+            rightFacing = direction > 0;
+            transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
+        }
+
     }
 
     public void Jump()
@@ -79,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
         animator.SetBool("isJumping",true);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         var bounds = boxCollider.bounds;
         Gizmos.color = Color.red;

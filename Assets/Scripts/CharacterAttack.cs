@@ -8,16 +8,17 @@ public class CharacterAttack : MonoBehaviour
 {
     [SerializeField] private float attackCooldownSecs = 1.5f;
     [SerializeField] private int comboFailTreshold = 0;
-
+    [SerializeField] private bool autoCombo = false;
+    [SerializeField] private bool disableCombo = false;
     
     [Header("Component references")]
     [SerializeField] private CharacterMovement movementScript;
     [SerializeField] private Animator animator;
     
-    private bool canAttack = true;
+    private bool isNotCooldown = true;
     private bool canCombo = false;
     private bool isAttacking = false;
-    private bool isComboing = false;
+    private bool isComboActive = false;
     private int failedCombo = 0;
  
     public  bool IsAttacking => isAttacking;
@@ -34,9 +35,9 @@ public class CharacterAttack : MonoBehaviour
     {
         if ( !movementScript.IsGrounded) return;
         
-        if(!isAttacking && canAttack) StartAttack();
-        else if (isAttacking && canCombo && !isComboing) StartCombo();
-        else if (isAttacking && !isComboing && !canCombo)
+        if(!isAttacking && isNotCooldown) StartAttack();
+        else if (isAttacking && canCombo && !isComboActive) StartCombo();
+        else if (isAttacking && !isComboActive && !canCombo)
         {
             failedCombo++;
         }
@@ -51,18 +52,19 @@ public class CharacterAttack : MonoBehaviour
 
     private void StartCombo()
     {
-        isComboing = true;
+        if(disableCombo) return;
+        isComboActive = true;
         animator.SetTrigger("Combo");
     }
 
     
     private IEnumerator StartAttackCooldown()
     {
-        canAttack = false;
+        isNotCooldown = false;
         yield return new WaitForSeconds(attackCooldownSecs);
-        canAttack = true;
+        isNotCooldown = true;
         isAttacking = false;
-        isComboing = false;
+        isComboActive = false;
         canCombo = false;
         failedCombo =0 ;
     }
@@ -81,12 +83,14 @@ public class CharacterAttack : MonoBehaviour
     
     void OnAttackEnd()
     {
-        isAttacking = isComboing;
+        if(autoCombo) this.StartCombo();
+        
+        isAttacking = isComboActive;
     }
 
     void OnComboEnd()
     {
-        isComboing = false;
+        isComboActive = false;
         isAttacking = false;
     }
 }
