@@ -18,7 +18,8 @@ namespace CharacterBehaviour
         [SerializeField] private BoxCollider2D boxCollider;
         [SerializeField] private Animator animator;
 
-
+        public event Action OnGroundEnterEvent;
+        
         private bool wasGrounded = true;
         private bool rightFacing = true;
     
@@ -72,6 +73,7 @@ namespace CharacterBehaviour
     
         private void OnGroundEnter()
         {
+            OnGroundEnterEvent?.Invoke();
             animator.SetBool("isJumping", false);
         }
 

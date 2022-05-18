@@ -11,6 +11,8 @@ public class PlayerController : BaseController
     public CharacterMovement movementScript;
     public CharacterAttack attackScript;
 
+
+    
     private float horizontalMove = 0f;
     private bool jump = false;
     private bool attack = false;
@@ -54,5 +56,23 @@ public class PlayerController : BaseController
         jump = false;
         attack = false;
     }
-    
+
+    public override void OnCharacterDeath()
+    {
+        this.enabled = false;
+
+        if (movementScript.IsGrounded)
+        {
+            base.OnCharacterDeath();
+        }
+        else
+        {
+            movementScript.OnGroundEnterEvent += () =>
+            {
+                base.OnCharacterDeath();
+            };
+        }
+      
+        
+    }
 }

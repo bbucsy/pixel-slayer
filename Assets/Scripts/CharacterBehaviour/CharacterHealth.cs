@@ -50,6 +50,7 @@ namespace CharacterBehaviour
                 private void Die()
                 {
                         animator.SetTrigger("Die");
+                        animator.SetBool("isDead", true);
                         var controllers = gameObject.GetComponents<BaseController>();
 
                         foreach (var controller in controllers)
