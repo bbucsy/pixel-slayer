@@ -60,4 +60,13 @@ public class EnemyController : BaseController
         
     }
 
+    public override void OnCharacterDeath()
+    {
+        var score = GameObject.FindObjectOfType<PointController>();
+        if (score != null)
+        {
+            score.Points++;
+        }
+        base.OnCharacterDeath();
+    }
 }
