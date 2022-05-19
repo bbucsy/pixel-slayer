@@ -6,10 +6,10 @@ namespace CharacterBehaviour
 
     public class CharacterAttack : MonoBehaviour, ICharacterBehaviour
     {
-        [SerializeField] private float attackCooldownSecs = 1.5f;
-        [SerializeField] private int comboFailTreshold = 0;
-        [SerializeField] private bool autoCombo = false;
-        [SerializeField] private bool disableCombo = false;
+        public float attackCooldownSecs = 1.5f;
+        public int comboFailTreshold = 0;
+        public bool autoCombo = false;
+        public bool disableCombo = false;
     
         [Header("Component references")]
         [SerializeField] private CharacterMovement movementScript;

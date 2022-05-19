@@ -7,8 +7,10 @@ namespace CharacterBehaviour
 
                 [SerializeField] private int health = 100;
                 [SerializeField] private int maxHealth = 100;
-                [SerializeField] private GameObject hpBar;
+                public HpBar hpBar;
         
+                public float Health => (float) health / maxHealth;
+
 
                 [Header("Component references")]
                 [SerializeField] private Animator animator;
@@ -29,9 +31,8 @@ namespace CharacterBehaviour
                 
                         if (hpBar != null)
                         {
-                                var hpv = (float) health / (float)maxHealth;
-                                hpv = hpv < 0 ? 0 : hpv;
-                                hpBar.transform.localScale = new Vector3(hpv, 1, 1);
+                               
+                                hpBar.SetState(Health);
                         }
 
                 

@@ -22,11 +22,15 @@ namespace CharacterBehaviour
                 var healthScript = enemy.gameObject.GetComponent<CharacterHealth>();
                 if (healthScript != null)
                 {
-                    healthScript.Damage(damage);
+                    DamageEnemies(healthScript);
                 }
             }
         }
 
+        protected virtual void DamageEnemies(CharacterHealth healthScript)
+        {
+            healthScript.Damage(damage);
+        }
 
         private void OnDrawGizmos()
         {

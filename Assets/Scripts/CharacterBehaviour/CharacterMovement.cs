@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace CharacterBehaviour
@@ -7,10 +8,10 @@ namespace CharacterBehaviour
     public class CharacterMovement : MonoBehaviour, ICharacterBehaviour
     {
     
-        [SerializeField] private float moveSpeed = 3.0f;
-        [SerializeField] private float jumpForce = 100;
-        [SerializeField] private float groundCheckExtraHeight = 0.05f;
-        [SerializeField] private LayerMask platformLayerMask;
+       public float moveSpeed = 3.0f;
+       public float jumpForce = 100;
+       public float groundCheckExtraHeight = 0.05f;
+       public LayerMask platformLayerMask;
 
         [Header("Component references")]
         [SerializeField] private Rigidbody2D playerRb;
@@ -22,6 +23,7 @@ namespace CharacterBehaviour
         
         private bool wasGrounded = true;
         private bool rightFacing = true;
+        private bool sleep = false;
     
         private void Reset()
         {
@@ -31,7 +33,14 @@ namespace CharacterBehaviour
             if (boxCollider == null) boxCollider = GetComponent<BoxCollider2D>();
         }
 
-
+        
+        private IEnumerator _sleepMovement(float sec)
+        {
+            sleep = true;
+            yield return new WaitForSeconds(sec);
+            sleep = false;
+        }
+        
         public bool IsGrounded
         {
             get
@@ -46,7 +55,7 @@ namespace CharacterBehaviour
 
         public void Move(float direction, bool slowed = false)
         {
-            if(!IsGrounded) return;
+            if(sleep || !IsGrounded) return;
 
             var slowness = slowed ? 0.5f : 1f;
        
@@ -64,9 +73,16 @@ namespace CharacterBehaviour
 
         }
 
+        public void ThrowCharacter(Vector2 force, float dazeTime)
+        {
+            sleep = true;
+            StartCoroutine(_sleepMovement(dazeTime));
+            playerRb.AddForce(force);
+        }
+        
         public void Jump()
         {
-            if(!IsGrounded) return;
+            if(sleep || !IsGrounded) return;
             playerRb.AddForce(new Vector2(0f,jumpForce));
         }
     
