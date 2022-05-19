@@ -10,7 +10,7 @@ public class PlayerController : BaseController
 {
     public CharacterMovement movementScript;
     public CharacterAttack attackScript;
-
+    public GameObject deathSign;
 
     
     private float horizontalMove = 0f;
@@ -60,7 +60,8 @@ public class PlayerController : BaseController
     public override void OnCharacterDeath()
     {
         this.enabled = false;
-
+        deathSign.SetActive(true);
+        
         if (movementScript.IsGrounded)
         {
             base.OnCharacterDeath();

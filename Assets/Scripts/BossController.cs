@@ -31,7 +31,8 @@ public class BossController : BaseController
     public float phase1SafeRadius = 2;
     public PlayerController player;
     public LayerMask awakeLayers;
-
+    public GameObject winSign;
+    
     [Header("Phase options")] 
     public PhaseOptions initialStats;
     public PhaseOptions phase1Stats;
@@ -116,7 +117,7 @@ public class BossController : BaseController
                 setStats(initialStats);
                 break;
             case Phase.Phase1:
-                var bg = GameObject.Find("BackgroundMusic")?.GetComponent<AudioSource>();
+                var bg = GameObject.Find("GameManager")?.GetComponent<AudioSource>();
                 if (bg != null)
                 {
                     bg.clip = bossMusic;
@@ -150,5 +151,12 @@ public class BossController : BaseController
         Gizmos.DrawWireSphere(transform.position, attackRadius);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, phase1SafeRadius);
+    }
+
+    public override void OnCharacterDeath()
+    {
+        winSign.SetActive(true);
+        base.OnCharacterDeath();
+        
     }
 }

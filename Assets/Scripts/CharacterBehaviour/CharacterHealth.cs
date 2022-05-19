@@ -9,7 +9,7 @@ namespace CharacterBehaviour
                 [SerializeField] private int maxHealth = 100;
                 public HpBar hpBar;
                 public AudioClip damageClip;
-                public float Health => (float) health / maxHealth;
+                public float Health => health >= 0 ? (float) health / maxHealth : 0f;
 
 
                 [Header("Component references")]

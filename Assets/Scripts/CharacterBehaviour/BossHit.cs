@@ -17,7 +17,7 @@ namespace CharacterBehaviour
             base.DamageEnemies(healthScript);
             var rb = healthScript.gameObject.GetComponent<CharacterMovement>();
 
-            if (rb == null || player == null && useEffect) return;
+            if (rb == null || player == null || !useEffect) return;
             
             var dx = player.transform.position.x - gameObject.transform.position.x;
             var adx = math.abs(dx);
