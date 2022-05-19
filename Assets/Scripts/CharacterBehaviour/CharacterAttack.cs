@@ -10,10 +10,15 @@ namespace CharacterBehaviour
         public int comboFailTreshold = 0;
         public bool autoCombo = false;
         public bool disableCombo = false;
-    
+
+        [Header("Sounds")] 
+        public AudioClip attackClip;
+        public AudioClip comboClip;
+        
         [Header("Component references")]
         [SerializeField] private CharacterMovement movementScript;
         [SerializeField] private Animator animator;
+        [SerializeField] private AudioSource audioSource;
     
         private bool isNotCooldown = true;
         private bool canCombo = false;
@@ -27,13 +32,14 @@ namespace CharacterBehaviour
         {
             if (movementScript == null) movementScript = GetComponent<CharacterMovement>();
             if (animator == null) animator = GetComponent<Animator>();
+            if (audioSource == null) audioSource = GetComponent<AudioSource>();
         }
     
 
 
         public void Attack()
         {
-            if(!this.enabled) return;
+            if(!enabled) return;
             if ( !movementScript.IsGrounded) return;
         
             if(!isAttacking && isNotCooldown) StartAttack();
@@ -49,6 +55,7 @@ namespace CharacterBehaviour
             isAttacking = true;
             animator.SetTrigger("Attack");
             StartCoroutine(StartAttackCooldown());
+            playAttackSound();
         }
 
         private void StartCombo()
@@ -56,9 +63,27 @@ namespace CharacterBehaviour
             if(disableCombo) return;
             isComboActive = true;
             animator.SetTrigger("Combo");
+            playComboSound();
+            
         }
 
-    
+
+        public void playAttackSound()
+        {
+            if (attackClip != null)
+            {
+                audioSource.PlayOneShot(attackClip);
+            }
+        }
+
+        public void playComboSound()
+        {
+            if (comboClip != null)
+            {
+                audioSource.PlayOneShot(comboClip);
+            }
+        }
+        
         private IEnumerator StartAttackCooldown()
         {
             isNotCooldown = false;

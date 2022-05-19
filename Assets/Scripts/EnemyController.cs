@@ -54,8 +54,8 @@ public class EnemyController : BaseController
         Gizmos.DrawWireSphere(gameObject.transform.position,attackRange);
         
         Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(transform.position, new Vector3(detectRange,transform.localScale.y));
-        Gizmos.DrawWireCube(transform.position, new Vector3(detectThreshold,transform.localScale.y));
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.DrawWireSphere(transform.position, detectThreshold);
 
         
     }

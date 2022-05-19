@@ -41,7 +41,12 @@ public class BossController : BaseController
     public CharacterAttack attack;
     public BossHit hit;
     public CharacterHealth hp;
+    public AudioSource audioSource;
 
+    [Header("Sounds")] 
+    public AudioClip bossMusic;
+
+    public AudioClip laughter;
 
     private void Start()
     {
@@ -54,6 +59,7 @@ public class BossController : BaseController
         if (attack == null) attack = GetComponent<CharacterAttack>();
         if (hit == null) hit = GetComponent<BossHit>();
         if (hp == null) hp = GetComponent<CharacterHealth>();
+        if (audioSource == null) GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -110,6 +116,13 @@ public class BossController : BaseController
                 setStats(initialStats);
                 break;
             case Phase.Phase1:
+                var bg = GameObject.Find("BackgroundMusic")?.GetComponent<AudioSource>();
+                if (bg != null)
+                {
+                    bg.clip = bossMusic;
+                    bg.Play();
+                }
+                audioSource.PlayOneShot(laughter);
                 setStats(phase1Stats);
                 hp.hpBar.SetActive(true);
                 break;

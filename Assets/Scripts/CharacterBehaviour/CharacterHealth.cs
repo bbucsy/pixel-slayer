@@ -8,16 +8,19 @@ namespace CharacterBehaviour
                 [SerializeField] private int health = 100;
                 [SerializeField] private int maxHealth = 100;
                 public HpBar hpBar;
-        
+                public AudioClip damageClip;
                 public float Health => (float) health / maxHealth;
 
 
                 [Header("Component references")]
                 [SerializeField] private Animator animator;
 
+                [SerializeField] private AudioSource audioSource;
+
                 void Reset()
                 {
                         if (animator == null) animator = GetComponent<Animator>();
+                        if (audioSource == null) audioSource = GetComponent<AudioSource>();
                 }
 
                 private void Start()
@@ -43,7 +46,7 @@ namespace CharacterBehaviour
                         }
                         // show hit animation       
                         animator.SetTrigger("Hit");
-
+                        audioSource.PlayOneShot(damageClip);
 
                 }
 
